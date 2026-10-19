@@ -1,0 +1,6 @@
+Place your actual Kastura Pharma horizontal logo image in this folder named:
+kastura-logo-full.png
+
+Recommended: transparent PNG, approximately 600x160 pixels or similar wide aspect ratio.
+The website header and footer already reference ./assets/kastura-logo-full.png.
+If the file is absent, the header falls back to the existing text logo.
