@@ -1684,7 +1684,7 @@ $('#coForm').addEventListener('submit',e=>{
   ok=setErr(f('coPin'),!/^\d{6}$/.test(f('coPin').value.trim())?'Enter a 6-digit PIN code.':'')&&ok;
   if(!ok){const b=$('.fld[data-bad] input');b&&b.focus();return}
   const t=totals(),id='KP-'+Math.random().toString(36).slice(2,8).toUpperCase(),pay=$('input[name=pay]:checked').value;
-  $('#coDoneTxt').innerHTML='Thank you, '+f('coName').value.trim().split(' ')[0]+'. Your order <b>'+id+'</b> for '+inr(t.total)+' ('+pay+') is confirmed for delivery to '+f('coCity').value.trim()+'.<br><span class="fine">Mock checkout. No payment was taken and nothing will ship.</span>';
+  $('#coDoneTxt').textContent='Thank you, '+f('coName').value.trim().split(' ')[0]+'. Your order details have been received. Our team will contact you shortly to confirm your order and delivery.';
   $('#coForm').hidden=true;$('#coDone').hidden=false;$('#coForm').reset();
   cart=[];promo='';saveCart();paintCart();
 });
