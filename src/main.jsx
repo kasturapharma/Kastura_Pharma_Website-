@@ -67,7 +67,7 @@ function App(){
     const email=value('newsEmail');if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){const m=host.current.querySelector('#newsMsg');if(m)m.textContent='Please enter a valid email address.';return;}
     payload={...payload,formType:'Newsletter',email};
    } else if(id==='coForm'){
-    payload={...payload,formType:'Checkout Order (Mock)',name:value('coName'),phone:value('coPhone'),address:value('coAddr'),city:value('coCity'),pin:value('coPin'),paymentMethod:host.current.querySelector('input[name="pay"]:checked')?.value||'',items:host.current.querySelector('#coSummary')?.textContent||'',note:'Mock checkout only; no payment or fulfilment is performed.'};
+    payload={...payload,formType:'Checkout Order',name:value('coName'),phone:value('coPhone'),address:value('coAddr'),city:value('coCity'),pin:value('coPin'),paymentMethod:host.current.querySelector('input[name="pay"]:checked')?.value||'',items:host.current.querySelector('#coSummary')?.textContent||''};
    }
    if(submit)submit.disabled=true;
    if(id==='contactForm')status(statusEl,'Sending your message…','pending');
@@ -77,7 +77,7 @@ function App(){
     else if(id==='newsForm'){const m=host.current.querySelector('#newsMsg');if(m){m.textContent='You are subscribed. Thank you.';m.style.color='#6fe0a4'}form.reset();}
     else if(id==='cbForm'){const done=host.current.querySelector('#cbDoneTxt');if(done)done.textContent='Thank you. Your callback request has been submitted.';form.hidden=true;const d=host.current.querySelector('#cbDone');if(d)d.hidden=false;}
     else if(id==='heroCapture'){const err=host.current.querySelector('#heroErr');if(err)err.textContent='Thank you. Your callback request has been submitted.';form.reset();}
-    else if(id==='coForm'){const t=host.current.querySelector('#coDoneTxt');if(t)t.textContent='Your order details have been submitted. This is a demo checkout; no payment was taken and nothing will ship.';form.hidden=true;const d=host.current.querySelector('#coDone');if(d)d.hidden=false;}
+    else if(id==='coForm'){const t=host.current.querySelector('#coDoneTxt');if(t)t.textContent='Your order details have been received. Our team will contact you shortly to confirm your order and delivery.';form.hidden=true;const d=host.current.querySelector('#coDone');if(d)d.hidden=false;}
    }).catch(err=>{if(id==='contactForm')status(statusEl,err.message||'Unable to submit. Please try again.','error');else alert(err.message||'Unable to submit this form. Please try again.');})
     .finally(()=>{if(submit)submit.disabled=false;});
   }
