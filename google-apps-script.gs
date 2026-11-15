@@ -33,7 +33,21 @@ function doPost(e){
       case 'Contact Us': sheet=ss.getSheetByName('Contact Us');row=[safe(data.submittedAt||new Date().toISOString()),safe(data.name),safe(data.email),safe(data.phone),safe(data.topic),safe(data.message),data.consent?'Yes':'No',page];break;
       case 'Callback Request':case 'Hero Callback Request': sheet=ss.getSheetByName('Callback Requests');row=[safe(data.submittedAt||new Date().toISOString()),safe(data.name),safe(data.phone),safe(data.preferredTime),safe(data.topic),data.consent?'Yes':'Not collected',page];break;
       case 'Newsletter': sheet=ss.getSheetByName('Newsletter');row=[safe(data.submittedAt||new Date().toISOString()),safe(data.email),page];break;
-      case 'Checkout Order (Mock)': sheet=ss.getSheetByName('Orders (Mock)');row=[safe(data.submittedAt||new Date().toISOString()),safe(data.name),safe(data.phone),safe(data.address),safe(data.city),safe(data.pin),safe(data.paymentMethod),safe(data.items),safe(data.note),page];break;
+      case 'Checkout Order':
+  sheet=ss.getSheetByName('Orders (Mock)');
+  row=[
+    safe(data.submittedAt||new Date().toISOString()),
+    safe(data.name),
+    safe(data.phone),
+    safe(data.address),
+    safe(data.city),
+    safe(data.pin),
+    safe(data.paymentMethod),
+    safe(data.items),
+    safe(data.note),
+    page
+  ];
+  break;
       default: sheet=ss.getSheetByName('Other Forms');row=[safe(data.submittedAt||new Date().toISOString()),safe(data.formType||'Unknown'),safe(JSON.stringify(data)),page];
     }
     // Prevent spreadsheet formula injection from user-entered strings.
