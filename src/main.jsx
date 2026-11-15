@@ -5,6 +5,18 @@ import './shell.css';
 function App(){
  const host=useRef(null);
  useEffect(()=>{
+  // Apply the website theme before loading its CSS.
+  let savedTheme = 'light';
+
+  try {
+    savedTheme = localStorage.getItem('kp-theme-v2') || 'light';
+  } catch(e) {
+    savedTheme = 'light';
+  }
+
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.documentElement.style.colorScheme = savedTheme;
+
   let cancelled=false; const added=[];
   async function mount(){
    try{
