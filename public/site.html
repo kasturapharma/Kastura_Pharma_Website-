@@ -9,23 +9,85 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('kp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script>
+document.documentElement.classList.add('js');
+try {
+  var t = localStorage.getItem('kp-theme-v2') || 'light';
+  document.documentElement.setAttribute('data-theme', t);
+} catch(e) {
+  document.documentElement.setAttribute('data-theme', 'light');
+}
+</script>
 <style>
 /* ============ Tokens ============ */
 :root{
-  --bg:#eee5d5; --soft:#e7dece; --cream:#e4d8c4; --card:#f7f1e7;
-  --ink:#0b2417; --muted:#4f665a; --line:#dce6de;
-  --brand:#0f5a3a; --brand-2:#0a3b27; --brand-3:#072a1b; --leaf:#2f9461; --mint:#cfe8d8;
-  --gold:#c99a2e; --orange:#e4892b; --red:#c8202a;
-  --btn-bg:#0f5a3a; --btn-ink:#ffffff; --link:#0f5a3a;
-  --hdr:rgba(238,229,213,.90);
-  --shadow:0 1px 2px rgba(10,59,39,.05),0 18px 50px -18px rgba(10,59,39,.22);
-  --shadow-lg:0 30px 80px -20px rgba(10,59,39,.35);
-  --r-lg:28px; --r-md:20px; --r-sm:12px;
+  --bg:#F6F2E9;
+  --soft:#ECE7DC;
+  --cream:#E6DDCA;
+  --card:#FFFCF6;
+
+  --ink:#26372D;
+  --muted:#68766B;
+  --line:#DEDCCF;
+
+  --brand:#294C3B;
+  --brand-2:#203D30;
+  --brand-3:#172F25;
+  --leaf:#829477;
+  --mint:#DCE7D8;
+
+  --gold:#B69A62;
+  --orange:#C98B50;
+  --red:#C8202A;
+
+  --btn-bg:#294C3B;
+  --btn-ink:#FFFFFF;
+  --link:#294C3B;
+
+  --hdr:rgba(246,242,233,.94);
+
+  --shadow:0 2px 8px rgba(38,55,45,.04),0 18px 50px -18px rgba(38,55,45,.15);
+  --shadow-lg:0 30px 80px -20px rgba(38,55,45,.22);
+
+  --r-lg:28px;
+  --r-md:20px;
+  --r-sm:12px;
+
   --ease:cubic-bezier(.2,.7,.2,1);
+
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#17251D;
+    --soft:#203329;
+    --cream:#294034;
+    --card:#203329;
+    --ink:#F3F1E9;
+    --muted:#B3BEB3;
+    --line:#394C40;
+    --btn-bg:#829477;
+    --btn-ink:#17251D;
+    --link:#C3D1B8;
+    --hdr:rgba(23,37,29,.92);
+  }
+}
+
+:root[data-theme="dark"]{
+  --bg:#17251D;
+  --soft:#203329;
+  --cream:#294034;
+  --card:#203329;
+  --ink:#F3F1E9;
+  --muted:#B3BEB3;
+  --line:#394C40;
+  --btn-bg:#829477;
+  --btn-ink:#17251D;
+  --link:#C3D1B8;
+  --hdr:rgba(23,37,29,.92);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -220,9 +282,92 @@ input,select,textarea{font:inherit;color:inherit}
 .section{padding:clamp(72px,10vw,140px) 0}
 .sec-head{text-align:center;max-width:840px;margin:0 auto clamp(40px,6vw,72px)}
 .sec-head p{font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--muted);margin-top:20px}
-.reveal{transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.js .reveal{opacity:0;transform:translateY(26px)}
-.js .reveal.in{opacity:1;transform:none}
+/* Modern scroll reveal animations */
+
+.reveal{
+  transition:
+    opacity .85s var(--ease),
+    transform .85s var(--ease),
+    filter .85s var(--ease);
+}
+
+.js .reveal{
+  opacity:0;
+  transform:translateY(38px);
+  filter:blur(5px);
+}
+
+.js .reveal.in{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+}
+
+/* Reveal direction variations */
+
+.js .reveal-left{
+  opacity:0;
+  transform:translateX(-40px);
+  filter:blur(4px);
+}
+
+.js .reveal-right{
+  opacity:0;
+  transform:translateX(40px);
+  filter:blur(4px);
+}
+
+.js .reveal-scale{
+  opacity:0;
+  transform:scale(.96);
+}
+
+.js .reveal-left.in,
+.js .reveal-right.in,
+.js .reveal-scale.in{
+  opacity:1;
+  transform:none;
+  filter:blur(0);
+}
+
+/* Smooth card hover */
+
+.card,
+.suite-card,
+.feature,
+.mini{
+  transition:
+    transform .4s var(--ease),
+    box-shadow .4s var(--ease),
+    border-color .4s ease;
+}
+
+.card:hover,
+.feature:hover,
+.mini:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow);
+}
+
+/* Smooth image hover */
+
+img{
+  transition:transform .6s var(--ease);
+}
+
+/* Respect reduced-motion settings */
+
+@media(prefers-reduced-motion:reduce){
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+    transition:none!important;
+  }
+}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
 
 /* Suite */
@@ -1786,7 +1931,14 @@ const FAQ=[
   const b=$('#themeBtn'),root=document.documentElement;
   const isDark=()=>root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);
   const label=()=>b.textContent=isDark()?'Switch to light theme':'Switch to dark theme';
-  b.onclick=()=>{const n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('kp-theme',n)}catch(e){}label()};
+  b.onclick=()=>{
+  const n=isDark()?'light':'dark';
+  root.setAttribute('data-theme',n);
+  try{
+    localStorage.setItem('kp-theme-v2',n);
+  }catch(e){}
+  label();
+};
   label();
 })();
 
