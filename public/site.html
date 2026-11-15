@@ -89,22 +89,7 @@ try {
   --link:#C3D1B8;
   --hdr:rgba(23,37,29,.92);
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#08160f; --soft:#0d1f16; --cream:#11271b; --card:#0f2218;
-    --ink:#e9f3ec; --muted:#9db4a5; --line:#1f3529;
-    --btn-bg:#3cb27a; --btn-ink:#04170e; --link:#5fcf98;
-    --hdr:rgba(8,22,15,.82);
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 50px -18px rgba(0,0,0,.6);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#08160f; --soft:#0d1f16; --cream:#11271b; --card:#0f2218;
-  --ink:#e9f3ec; --muted:#9db4a5; --line:#1f3529;
-  --btn-bg:#3cb27a; --btn-ink:#04170e; --link:#5fcf98;
-  --hdr:rgba(8,22,15,.82);
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 50px -18px rgba(0,0,0,.6);
-}
+
 
 /* ============ Base ============ */
 *,*::before,*::after{box-sizing:border-box}
@@ -922,7 +907,7 @@ img{
 </div>
 
 <header class="hdr" id="hdr">
-  <div class="sec-head reveal reveal-left">
+  <div class="wrap hdr-in">
     <a href="#top" class="logo" aria-label="Kastura Pharma home">
       <img class="brand-logo" src="./assets/kastura-logo-full.png" alt="Kastura Pharma" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
       <span class="logo-txt"><b>KASTURA</b><small>PHARMA</small></span>
