@@ -269,23 +269,100 @@ input,select,textarea{font:inherit;color:inherit}
 .sec-head p{font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--muted);margin-top:20px}
 /* Modern scroll reveal animations */
 
+/* Premium scroll blur reveal */
+
 .reveal{
+  opacity:1;
   transition:
-    opacity .85s var(--ease),
-    transform .85s var(--ease),
-    filter .85s var(--ease);
+    opacity 1s cubic-bezier(.16,1,.3,1),
+    transform 1s cubic-bezier(.16,1,.3,1),
+    filter 1s cubic-bezier(.16,1,.3,1);
+  will-change:opacity,transform,filter;
 }
+
+/* Initial hidden state */
 
 .js .reveal{
   opacity:0;
-  transform:translateY(38px);
-  filter:blur(5px);
+  transform:translate3d(0,42px,0) scale(.985);
+  filter:blur(12px);
 }
+
+/* Revealed state */
 
 .js .reveal.in{
   opacity:1;
-  transform:translateY(0);
+  transform:translate3d(0,0,0) scale(1);
   filter:blur(0);
+  will-change:auto;
+}
+
+/* Reveal from left */
+
+.js .reveal-left{
+  opacity:0;
+  transform:translate3d(-45px,0,0);
+  filter:blur(10px);
+}
+
+/* Reveal from right */
+
+.js .reveal-right{
+  opacity:0;
+  transform:translate3d(45px,0,0);
+  filter:blur(10px);
+}
+
+/* Image and visual reveal */
+
+.js .reveal-scale{
+  opacity:0;
+  transform:scale(.94);
+  filter:blur(14px);
+}
+
+/* Final state for directional reveals */
+
+.js .reveal-left.in,
+.js .reveal-right.in,
+.js .reveal-scale.in{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+  will-change:auto;
+}
+
+/* Accessibility */
+
+@media(prefers-reduced-motion:reduce){
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+    transition:none!important;
+    will-change:auto!important;
+  }
+}
+
+/* Staggered reveal timing */
+
+.reveal-stagger > .reveal:nth-child(1){
+  transition-delay:.05s;
+}
+
+.reveal-stagger > .reveal:nth-child(2){
+  transition-delay:.15s;
+}
+
+.reveal-stagger > .reveal:nth-child(3){
+  transition-delay:.25s;
+}
+
+.reveal-stagger > .reveal:nth-child(4){
+  transition-delay:.35s;
 }
 
 /* Reveal direction variations */
@@ -1377,7 +1454,7 @@ img{
 
 <!-- ================= FOOTER ================= -->
 
-<section id="contact" class="contact-sec" aria-labelledby="contactTitle"><div class="wrap"><div class="sec-head"><span class="pill">We are here to help</span><h2 id="contactTitle">Contact Kastura Pharma</h2><p class="muted">Questions about Dyboshil Liquid, an order, or our products? Send us a message and our team will get back to you.</p></div><div class="contact-layout"><div class="contact-copy reveal reveal-left"><h3>Let’s talk</h3><p>Share a few details and we’ll route your message to the right person.</p><p class="contact-note">Please do not include private medical information or urgent medical concerns in this form.</p></div><form id="contactForm" class="contact-form reveal reveal-right" novalidate><div class="row2"><div class="fld"><label for="ctName">Full name *</label><input id="ctName" name="name" autocomplete="name" required maxlength="120" placeholder="Your name"><div class="err"></div></div><div class="fld"><label for="ctEmail">Email address *</label><input id="ctEmail" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"><div class="err"></div></div></div><div class="row2"><div class="fld"><label for="ctPhone">Mobile number (optional)</label><input id="ctPhone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Your phone number"></div><div class="fld"><label for="ctTopic">What is this about? *</label><select id="ctTopic" name="topic" required><option value="Product question">Product question</option><option value="Order or delivery">Order or delivery</option><option value="Quality or batch verification">Quality or batch verification</option><option value="Business enquiry">Business enquiry</option><option value="Other">Other</option></select></div></div><div class="fld"><label for="ctMessage">Message *</label><textarea id="ctMessage" name="message" rows="5" required maxlength="4000" placeholder="How can we help?"></textarea><div class="err"></div></div><label class="consent"><input type="checkbox" id="ctConsent" required><span>I agree that Kastura Pharma may use these details to respond to my enquiry. *</span></label><div id="ctStatus" class="contact-status" role="status" aria-live="polite"></div><button class="btn btn-primary" id="ctSubmit" type="submit">Send message <svg class="ic go"><use href="#i-arrow"/></svg></button><p class="fine">Fields marked * are required. Thank you for getting in touch with Kastura Pharma.</p></form></div></div></section>
+<section id="contact" class="contact-sec" aria-labelledby="contactTitle"><div class="wrap"><div class="sec-head reveal"><span class="pill">We are here to help</span><h2 id="contactTitle">Contact Kastura Pharma</h2><p class="muted">Questions about Dyboshil Liquid, an order, or our products? Send us a message and our team will get back to you.</p></div><div class="contact-layout"><div class="contact-copy reveal reveal-left"><h3>Let’s talk</h3><p>Share a few details and we’ll route your message to the right person.</p><p class="contact-note">Please do not include private medical information or urgent medical concerns in this form.</p></div><form id="contactForm" class="contact-form reveal reveal-right" novalidate><div class="row2"><div class="fld"><label for="ctName">Full name *</label><input id="ctName" name="name" autocomplete="name" required maxlength="120" placeholder="Your name"><div class="err"></div></div><div class="fld"><label for="ctEmail">Email address *</label><input id="ctEmail" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"><div class="err"></div></div></div><div class="row2"><div class="fld"><label for="ctPhone">Mobile number (optional)</label><input id="ctPhone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Your phone number"></div><div class="fld"><label for="ctTopic">What is this about? *</label><select id="ctTopic" name="topic" required><option value="Product question">Product question</option><option value="Order or delivery">Order or delivery</option><option value="Quality or batch verification">Quality or batch verification</option><option value="Business enquiry">Business enquiry</option><option value="Other">Other</option></select></div></div><div class="fld"><label for="ctMessage">Message *</label><textarea id="ctMessage" name="message" rows="5" required maxlength="4000" placeholder="How can we help?"></textarea><div class="err"></div></div><label class="consent"><input type="checkbox" id="ctConsent" required><span>I agree that Kastura Pharma may use these details to respond to my enquiry. *</span></label><div id="ctStatus" class="contact-status" role="status" aria-live="polite"></div><button class="btn btn-primary" id="ctSubmit" type="submit">Send message <svg class="ic go"><use href="#i-arrow"/></svg></button><p class="fine">Fields marked * are required. Thank you for getting in touch with Kastura Pharma.</p></form></div></div></section>
 
 <footer class="foot">
   <div class="wrap">
@@ -1604,11 +1681,34 @@ $('#heroCapture').addEventListener('submit',e=>{
 })();
 
 /* ---------- Reveal + counters ---------- */
-const io=new IntersectionObserver(es=>es.forEach(en=>{
-  if(!en.isIntersecting)return;const el=en.target;el.classList.add('in');io.unobserve(el);
-  $$('[data-count]',el).forEach(count);if(el.matches&&el.matches('[data-count]'))count(el);
-}),{threshold:.15,rootMargin:'0px 0px -6% 0px'});
-$$('.reveal,.mtn').forEach(el=>io.observe(el));
+/* ---------- Premium Scroll Reveal + Counters ---------- */
+
+const revealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting) return;
+
+    const el = entry.target;
+
+    el.classList.add('in');
+
+    // Start counters when their section becomes visible.
+    $$('[data-count]',el).forEach(count);
+
+    if(el.matches('[data-count]')){
+      count(el);
+    }
+
+    // Animate each element only once.
+    revealObserver.unobserve(el);
+  });
+},{
+  threshold:0.12,
+  rootMargin:'0px 0px -50px 0px'
+});
+
+$$('.reveal,.mtn').forEach(el=>{
+  revealObserver.observe(el);
+});
 function count(el){
   if(el.dataset.done)return;el.dataset.done=1;
   const to=+el.dataset.count,suf=el.dataset.suffix||'',dur=1600;
