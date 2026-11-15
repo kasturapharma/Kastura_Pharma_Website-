@@ -1986,7 +1986,7 @@ const ART=[
     const c=document.createElement('a');c.href='#journal';c.className='card j-card reveal';
     c.innerHTML='<div class="j-art" style="background:'+a.c+'"><svg class="ic" style="stroke-width:1.2"><use href="#'+a.i+'"/></svg></div><div class="j-body"><small>'+a.m+'</small><h4>'+a.t+'</h4><p>'+a.d+'</p><span class="link">Read article <svg class="ic"><use href="#i-arrow"/></svg></span></div>';
     c.onclick=e=>{e.preventDefault();$('#arTitle').textContent=a.t;$('#arMeta').textContent=a.m+' · Kastura Journal';$('#arBody').innerHTML=a.b.map(p=>'<p>'+p+'</p>').join('');openOverlay($('#m-article'))};
-    g.appendChild(c);io.observe(c);
+    g.appendChild(c);revealObserver.observe(c);
   });
 })();
 
@@ -2043,7 +2043,7 @@ const FAQ=[
     if(sh)sh.style.textAlign='center';
     h.parentNode.insertBefore(s,h);
     if(sh){s.style.display='flex';s.style.justifyContent='center'}
-    if(typeof io!=='undefined')io.observe(s);else s.classList.add('in');
+    if(typeof io!=='undefined')revealObserver.observe(s);else s.classList.add('in');
   });
 
   /* Big tickers */
