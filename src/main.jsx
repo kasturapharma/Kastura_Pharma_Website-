@@ -5,6 +5,8 @@ import './shell.css';
 function App(){
  const host=useRef(null);
  useEffect(()=>{
+  // Enable CSS-based scroll reveal animations
+  document.documentElement.classList.add('js');
   // Apply the website theme before loading its CSS.
   let savedTheme = 'light';
 
